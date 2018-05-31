@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     };
 
     sampling_event(events,8,0,100,2000);
-    write_event("/home/lianghong/data/result/fluidanimate/data/",8,2000);
+//    write_event("/home/lianghong/data/result/fluidanimate/data/",8,2000);
 
 //    sampling_cpu(0,0,100,300);
 //    write_data_cpu(0,"/home/lianghong/data/events_data","/home/lianghong/data/power_data",300);
