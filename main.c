@@ -1,7 +1,16 @@
 #include "temp.h"
 #include "sampling_data.h"
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
+
+    if(argc!=4)
+    {
+        printf("Usage: ./power_sample <program> <time_intervel(ms)> <sample_count>\n");
+        printf("\nWrong Parameter!\n");
+        exit(1);
+    }
+
     char *events[]={
             "Instruction_Retired",
             "RESOURCE_STALLS.ANY",
@@ -13,11 +22,13 @@ int main(int argc, char *argv[]) {
             "L2_RQSTS.RFO_MISS"
     };
 
-    sampling_event(events,8,0,100,2000);
-//    write_event("/home/lianghong/data/result/fluidanimate/data/",8,2000);
 
-//    sampling_cpu(0,0,100,300);
-//    write_data_cpu(0,"/home/lianghong/data/events_data","/home/lianghong/data/power_data",300);
+    sampling_event(events,8,0,atoi(argv[2]),atoi(argv[3]));
+    char output_path[100];
+    sprintf(output_path,"/home/lianghong/data/%s",argv[1]);
+    write_event(output_path,8,atoi(argv[3]));
+
+//    display_all(0);
     return 0;
 }
 

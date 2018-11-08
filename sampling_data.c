@@ -196,16 +196,24 @@ void write_event(char *data_path,int event_num,int sample_per_count)
 {
     FILE *power_file,*events_file[CPU_COUNT];
     char file_name[66];
+    char cam[100];
+    // create data dir
+    sprintf(cam,"mkdir -p %s/data",data_path);
+    system(cam);
+    sprintf(cam,"chmod 777 %s/data",data_path);
+    system(cam);
+    printf("Create %s/data!\n",data_path);
+
     for(int i=0;i<CPU_COUNT;i++)
     {
-        sprintf(file_name,"%scpu_%d",data_path,i);
+        sprintf(file_name,"%s/data/cpu_%d",data_path,i);
         events_file[i]=fopen(file_name,"w");
         if(!events_file[i]){
             printf("OPEN %s failed!\n",file_name);
             exit(1);
         }
     }
-    sprintf(file_name,"%spower",data_path);
+    sprintf(file_name,"%s/data/power",data_path);
     power_file=fopen(file_name,"w");
     if(!power_file)
     {
